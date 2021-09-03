@@ -58,9 +58,7 @@ class _AutoState extends State<Auto> {
             ElevatedButton(
               onPressed: () async {
                 //download only when permission is granted
-                if (await Permission.manageExternalStorage
-                    .request()
-                    .isGranted) {
+                if (await Permission.storage.request().isGranted) {
                   Directory? appDocDir = await getExternalStorageDirectory();
 
                   String newPath = "";
@@ -78,7 +76,7 @@ class _AutoState extends State<Auto> {
                   appDocDir = Directory(newPath);
 
                   final task = await _download(appDocDir.path);
-                  await _openFile(task!);
+                  // await _openFile(task!);
                 }
               },
               child: Text('Download'),
